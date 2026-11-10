@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サイ⚪︎スロット｜予算内のメニューをランダムで決める</title>
+  <meta name="description" content="予算を入れてスロットを回すと、サイ○リヤで予算内に食べられるメニューの組み合わせがランダムで出てくる非公式ツールです。">
+  <meta name="theme-color" content="#1f6b3a">
+  <!-- フォント（Google Fonts・無料） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <p class="flag" aria-hidden="true"><span></span><span></span><span></span></p>
+    <!-- class="mosaic" をつけた文字はモザイクがかかります -->
+    <h1><span class="mosaic">サイ⚪︎</span>スロット</h1>
+    <p class="lead">予算を入れて回すだけ。今日のメニューをスロットが決めます。</p>
+  </header>
+
+  <main class="container">
+    <!-- 入力エリア -->
+    <section class="card controls" aria-label="条件の設定">
+      <label class="budget-label" for="budget">予算</label>
+      <div class="budget-row">
+        <button type="button" class="step" data-step="-100" aria-label="100円減らす">−</button>
+        <div class="budget-input">
+          <input id="budget" type="number" inputmode="numeric" min="100" max="20000" step="10" value="2000">
+          <span>円</span>
+        </div>
+        <button type="button" class="step" data-step="100" aria-label="100円増やす">＋</button>
+      </div>
+      <div class="presets" role="group" aria-label="よく使う予算">
+        <button type="button" data-budget="500">500円</button>
+        <button type="button" data-budget="1000">1000円</button>
+        <button type="button" data-budget="1500">1500円</button>
+        <button type="button" data-budget="2000">2000円</button>
+        <button type="button" data-budget="3000">3000円</button>
+      </div>
+
+      <div class="options">
+        <label class="switch">
+          <input type="checkbox" id="opt-drinkbar">
+          <span class="switch-ui" aria-hidden="true"></span>
+          <span class="switch-text">ドリンクバーを含める <small id="drinkbar-price"></small></span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-main" checked>
+          <span class="switch-ui" aria-hidden="true"></span>
+          <span class="switch-text">主食（パスタ・ピザ・ドリア・肉料理）を必ず1品入れる</span>
+        </label>
+      </div>
+
+      <details class="categories">
+        <summary>出てくるカテゴリを選ぶ</summary>
+        <div id="category-list" class="category-list"></div>
+      </details>
+    </section>
+
+    <button type="button" id="spin" class="spin-button">スロットを回す</button>
+    <p id="message" class="message" role="alert" hidden></p>
+
+    <!-- 結果エリア -->
+    <section id="result" class="card result" aria-live="polite" hidden>
+      <h2 class="result-title">今日のメニュー</h2>
+      <ol id="reels" class="reels"></ol>
+      <div class="summary">
+        <div class="summary-row">
+          <span>合計</span>
+          <strong id="total">0円</strong>
+        </div>
+        <div class="summary-row">
+          <span>予算の残り</span>
+          <strong id="remain">0円</strong>
+        </div>
+        <div class="meter" aria-hidden="true"><div id="meter-bar" class="meter-bar"></div></div>
+        <p id="verdict" class="verdict"></p>
+      </div>
+      <p class="hint">左の数字は注文用紙に書くメニュー番号です</p>
+    </section>
+
+    <!-- 広告スペース：将来ここに広告のコードを貼り付けます -->
+    <aside class="ad-slot" aria-label="広告">
+      <!-- 例：Google AdSense のコードをこの中に貼る -->
+      <span class="ad-placeholder">広告スペース</span>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p class="disclaimer">非公式ツールです。価格は店舗や時期によって異なる場合があります</p>
+    <p class="version">メニュー：<span id="menu-version"></span></p>
+  </footer>
+
+  <!-- メニューデータを先に読み込み、そのあとプログラムを読み込みます -->
+  <script src="menu-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

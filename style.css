@@ -1,0 +1,497 @@
+/* ============================================================
+   色の設定（ここを変えると全体の色が変わります）
+   ============================================================ */
+:root {
+  --green: #1f6b3a;
+  --green-dark: #154d29;
+  --red: #c4302b;
+  --cream: #fbf6ec;
+  --card: #ffffff;
+  --text: #2b2420;
+  --muted: #7a6f66;
+  --line: #e8dfd0;
+  --gold: #e9b949;
+  --terracotta: #dc9660;  /* 背景のテラコッタ色 */
+  --brown: #4e2a12;       /* テラコッタの上に置く文字の色 */
+
+  /* フォント（index.html で Google Fonts を読み込んでいます） */
+  --font-display: "Dela Gothic One", "Hiragino Sans", sans-serif;   /* 見出し・数字用 */
+  --font-body: "Zen Kaku Gothic New", -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif; /* 本文用 */
+  --reel-h: 66px; /* スロット1行の高さ */
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+/* 背景：テラコッタ色のイタリアの床タイル風
+   ・1枚目：上から差す光
+   ・2枚目：下のほうを少し暗く
+   ・3枚目：タイルの目地と、角の小さなひし形タイル（SVGで描いています） */
+html { background: var(--terracotta); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--terracotta);
+  background-image:
+    radial-gradient(120% 55% at 50% 0%, rgba(255, 238, 214, 0.6), rgba(255, 238, 214, 0) 70%),
+    radial-gradient(140% 60% at 50% 110%, rgba(110, 42, 12, 0.35), rgba(110, 42, 12, 0) 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M0 .5H64M.5 0V64' stroke='%237a3414' stroke-opacity='.22' fill='none'/%3E%3Cpath d='M0-7L7 0 0 7-7 0ZM64-7L71 0 64 7 57 0ZM0 57L7 64 0 71-7 64ZM64 57L71 64 64 71 57 64Z' fill='%23fff3e0' fill-opacity='.28'/%3E%3C/svg%3E");
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+button { font-family: inherit; }
+
+/* ---------- ヘッダー ---------- */
+/* ヘッダー：深い緑の壁に、うっすらレンガ模様。下にイタリア国旗の3色ライン */
+.site-header {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  padding: 22px 16px 28px;
+  background-color: var(--green);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cpath d='M0 .5H80M0 20.5H80M.5 0V20M40.5 20V40' stroke='%23fff' stroke-opacity='.08' fill='none'/%3E%3C/svg%3E"),
+    radial-gradient(90% 120% at 50% 0%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, #154d29 0%, #1f6b3a 55%, #23753f 100%);
+  box-shadow: 0 6px 18px rgba(60, 25, 5, 0.35);
+}
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #3fae5a 0 33.3%, #fff 33.3% 66.6%, #e5484d 66.6% 100%);
+}
+.site-header h1 { text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.flag {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto 8px;
+  width: 48px;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.flag span { flex: 1; }
+.flag span:nth-child(1) { background: #3fae5a; }
+.flag span:nth-child(2) { background: #fff; }
+.flag span:nth-child(3) { background: #e5484d; }
+.site-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+}
+/* モザイク */
+.mosaic-canvas {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -0.15em;
+  margin-right: 0.05em;
+  image-rendering: pixelated; /* 拡大してもぼかさずカクカクに */
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.lead {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* ---------- 全体の幅 ---------- */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 18px 16px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 8px 24px rgba(80, 30, 5, 0.22);
+}
+
+/* ---------- 予算入力 ---------- */
+.budget-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.budget-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.step {
+  flex: 0 0 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: #fff;
+  font-size: 1.5rem;
+  color: var(--green);
+  cursor: pointer;
+}
+.step:active { background: var(--cream); }
+.budget-input {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  border-bottom: 3px solid var(--green);
+  padding-bottom: 2px;
+}
+.budget-input input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  text-align: right;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+.budget-input span { font-size: 1.2rem; font-weight: 700; margin-left: 4px; }
+
+.presets {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+.presets button {
+  padding: 8px 0;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--cream);
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--text);
+}
+.presets button.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+/* ---------- スイッチ ---------- */
+.options { margin-top: 18px; display: grid; gap: 12px; }
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.switch input { position: absolute; opacity: 0; pointer-events: none; }
+.switch-ui {
+  flex: 0 0 48px;
+  height: 28px;
+  border-radius: 999px;
+  background: #d6cdbf;
+  position: relative;
+  transition: background 0.2s;
+}
+.switch-ui::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+.switch input:checked + .switch-ui { background: var(--green); }
+.switch input:checked + .switch-ui::after { transform: translateX(20px); }
+.switch input:focus-visible + .switch-ui { outline: 3px solid var(--gold); outline-offset: 2px; }
+.switch-text small { color: var(--muted); }
+
+/* ---------- カテゴリ選択 ---------- */
+.categories {
+  margin-top: 16px;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+}
+.categories summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--green);
+  font-weight: 700;
+}
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; }
+.chip span {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 0.85rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+.chip input:checked + span {
+  background: #e6f2ea;
+  border-color: var(--green);
+  color: var(--green-dark);
+  font-weight: 700;
+}
+.chip input:focus-visible + span { outline: 3px solid var(--gold); }
+
+/* ---------- 回すボタン ---------- */
+.spin-button {
+  display: block;
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 18px;
+  border: none;
+  border-radius: 16px;
+  background: var(--red);
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  box-shadow: 0 5px 0 #8f201c;
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.spin-button:active { transform: translateY(4px); box-shadow: 0 1px 0 #8f201c; }
+.spin-button:disabled { opacity: 0.7; cursor: wait; }
+
+.message {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fdecea;
+  color: #8f201c;
+  font-size: 0.9rem;
+}
+
+/* ---------- 結果 ---------- */
+.result { margin-top: 20px; }
+.result-title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--green);
+}
+.reels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.reel {
+  display: flex;
+  align-items: stretch;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--text);
+  background: #fff;
+}
+.reel-code {
+  flex: 0 0 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--text);
+  color: var(--gold);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+.reel-window {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: var(--reel-h);
+  overflow: hidden;
+}
+/* 上下を少しぼかしてリールっぽく */
+.reel-window::before,
+.reel-window::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 14px;
+  z-index: 1;
+  pointer-events: none;
+}
+.reel-window::before { top: 0; background: linear-gradient(#fff, rgba(255, 255, 255, 0)); }
+.reel-window::after { bottom: 0; background: linear-gradient(rgba(255, 255, 255, 0), #fff); }
+.reel-strip { will-change: transform; }
+.reel-item {
+  height: var(--reel-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 12px;
+}
+.reel-name { min-width: 0; }
+.reel-text {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.reel-cat { display: block; font-size: 0.7rem; color: var(--muted); font-weight: 400; }
+.reel-price {
+  flex: 0 0 auto;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.reel.stopped { animation: pop 0.25s ease-out; border-color: var(--green); }
+.reel.stopped .reel-code { background: var(--green); color: #fff; }
+.reel.drinkbar .reel-code { background: #2a5d9f; color: #fff; }
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.summary {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 2px dashed var(--line);
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 1rem;
+}
+.summary-row strong {
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.summary-row + .summary-row strong { color: var(--green); font-size: 1.3rem; }
+.meter {
+  margin-top: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--cream);
+  overflow: hidden;
+}
+.meter-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  transition: width 0.6s ease-out;
+}
+.verdict {
+  margin: 10px 0 0;
+  text-align: center;
+  font-weight: 800;
+  color: var(--red);
+  min-height: 1.6em;
+}
+.hint {
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- 広告スペース ---------- */
+.ad-slot {
+  margin: 24px 0 0;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(78, 42, 18, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 243, 224, 0.25);
+}
+.ad-placeholder { font-size: 0.75rem; color: rgba(78, 42, 18, 0.6); }
+
+/* ---------- フッター ---------- */
+.site-footer {
+  text-align: center;
+  padding: 16px 16px 32px;
+  color: var(--brown);
+  font-size: 0.8rem;
+}
+.site-footer p { margin: 4px 0; }
+.disclaimer { font-weight: 700; }
+
+/* ---------- 紙吹雪（予算ぴったりのとき） ---------- */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none; /* 紙吹雪が出ていてもボタンを押せるように */
+  z-index: 100;
+}
+.confetti {
+  position: absolute;
+  top: -20px;
+  border-radius: 2px;
+  opacity: 0;
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.25, 0.6, 0.5, 1);
+  animation-fill-mode: forwards;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+@keyframes confetti-fall {
+  0%   { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--drift), 105vh) rotate(var(--spin)); }
+}
+
+/* 動きを減らす設定の人向け */
+@media (prefers-reduced-motion: reduce) {
+  .reel.stopped { animation: none; }
+  .meter-bar { transition: none; }
+}
+
+/* ---------- 見出し・数字に「かっこいいフォント」を使う場所 ----------
+   （ほかの指定に上書きされないよう、ファイルの最後に置いています） */
+.site-header h1,
+.spin-button,
+.result-title,
+.budget-input input,
+.budget-input span,
+.reel-code,
+.reel-price,
+.summary-row strong,
+.verdict {
+  font-family: var(--font-display);
+  font-weight: 400; /* このフォントは最初から太いので、さらに太くしない */
+}
+.reel-code { font-size: 0.82rem; letter-spacing: 0.03em; }
+.reel-price { font-size: 0.9rem; }
