@@ -2,7 +2,7 @@
 
 予算を入れて「スロットを回す」を押すと、サイ○リヤで予算内に食べられるメニューの組み合わせがランダムで出てくる **非公式** Webアプリです。
 
-公開URL：https://yururi-tools.github.io/sai-slot/
+公開URL：https://novalis-lab.github.io/sai-slot/
 
 ## ファイルの役割
 
