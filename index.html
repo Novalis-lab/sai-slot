@@ -42,11 +42,28 @@
   <!-- フォント（Google Fonts・無料） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Unbounded:wght@800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
+    <!-- 上のバー：novalisのトップへ戻る -->
+    <nav class="topbar" aria-label="サイト">
+      <a class="home" href="https://novalis-lab.github.io/">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="150" y1="110" x2="380" y2="400">
+              <stop offset="0" stop-color="#22d3ee"/><stop offset="0.55" stop-color="#7c6cff"/><stop offset="1" stop-color="#ff5ea8"/>
+            </linearGradient>
+          </defs>
+          <rect width="512" height="512" rx="112" fill="#0b0c18" stroke="rgba(255,255,255,0.25)" stroke-width="8"/>
+          <path d="M164 370 V158 L348 362 V254" fill="none" stroke="url(#lg)" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M352 82 C358 124 370 136 412 146 C370 156 358 168 352 210 C346 168 334 156 292 146 C334 136 346 124 352 82 Z" fill="#ffffff"/>
+        </svg>
+        <span class="home-name">NOVALIS</span>
+      </a>
+      <a class="back" href="https://novalis-lab.github.io/"><span aria-hidden="true">←</span>トップへ</a>
+    </nav>
     <p class="flag" aria-hidden="true"><span></span><span></span><span></span></p>
     <!-- class="mosaic" をつけた文字はモザイクがかかります -->
     <h1><span class="mosaic">サイ⚪︎</span>スロット</h1>
@@ -122,6 +139,7 @@
   </main>
 
   <footer class="site-footer">
+    <a class="footer-home" href="https://novalis-lab.github.io/">ほかのツールも見る<span aria-hidden="true">→</span></a>
     <p class="disclaimer">非公式ツールです。価格は店舗や時期によって異なる場合があります</p>
     <p class="version">メニュー：<span id="menu-version"></span></p>
   </footer>

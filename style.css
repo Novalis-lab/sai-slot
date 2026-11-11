@@ -68,6 +68,51 @@ button { font-family: inherit; }
   height: 6px;
   background: linear-gradient(90deg, #3fae5a 0 33.3%, #fff 33.3% 66.6%, #e5484d 66.6% 100%);
 }
+/* ---------- 上のバー（ロゴとトップへ戻るボタン） ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 480px;
+  margin: -10px auto 12px;
+  text-align: left;
+}
+.home {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: #fff;
+  text-decoration: none;
+}
+.home svg { width: 32px; height: 32px; flex: none; }
+.home-name {
+  font-family: "Unbounded", var(--font-body);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.back:hover, .back:focus-visible { background: rgba(255, 255, 255, 0.2); border-color: #fff; }
+@media (max-width: 340px) {
+  .home-name { display: none; }
+}
+
 .site-header h1 { text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
 .flag {
   display: flex;
@@ -448,6 +493,24 @@ button { font-family: inherit; }
 }
 .site-footer p { margin: 4px 0; }
 .disclaimer { font-weight: 700; }
+.footer-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  margin: 4px 0 18px;
+  padding: 0 26px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(60, 25, 5, 0.3);
+  transition: transform .2s, background .2s;
+}
+.footer-home:hover, .footer-home:focus-visible { background: var(--green-dark); transform: translateY(-2px); }
 
 /* ---------- 紙吹雪（予算ぴったりのとき） ---------- */
 .confetti-layer {
