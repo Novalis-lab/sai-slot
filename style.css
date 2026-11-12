@@ -86,7 +86,8 @@ button { font-family: inherit; }
   color: #fff;
   text-decoration: none;
 }
-.home svg { width: 32px; height: 32px; flex: none; }
+.home svg,
+.home img { width: 32px; height: 32px; flex: none; display: block; border-radius: 7px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25); }
 .home-name {
   font-family: "Unbounded", var(--font-body);
   font-weight: 800;
