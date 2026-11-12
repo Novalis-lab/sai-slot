@@ -51,14 +51,17 @@
     <nav class="topbar" aria-label="サイト">
       <a class="home" href="https://novalis-lab.github.io/">
         <svg viewBox="0 0 512 512" aria-hidden="true">
+          <!-- novalis の新しいロゴ（太い N ＋ 青く光るひし形） -->
           <defs>
-            <linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="150" y1="110" x2="380" y2="400">
-              <stop offset="0" stop-color="#22d3ee"/><stop offset="0.55" stop-color="#7c6cff"/><stop offset="1" stop-color="#ff5ea8"/>
-            </linearGradient>
+            <clipPath id="nv-r"><rect width="512" height="512" rx="112"/></clipPath>
+            <mask id="nv-cut"><rect width="512" height="512" fill="#fff"/><polygon points="318,234 398,120 398,132 318,246"/><polygon points="318,266 398,152 398,164 318,278"/><polygon points="318,298 398,184 398,196 318,310"/></mask>
           </defs>
-          <rect width="512" height="512" rx="112" fill="#0b0c18" stroke="rgba(255,255,255,0.25)" stroke-width="8"/>
-          <path d="M164 370 V158 L348 362 V254" fill="none" stroke="url(#lg)" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M352 82 C358 124 370 136 412 146 C370 156 358 168 352 210 C346 168 334 156 292 146 C334 136 346 124 352 82 Z" fill="#ffffff"/>
+          <g clip-path="url(#nv-r)">
+            <rect width="512" height="512" fill="#0b0b0d"/>
+            <g fill="#f2f0ea" mask="url(#nv-cut)"><rect x="118" y="150" width="76" height="250"/><rect x="318" y="150" width="76" height="250"/><polygon points="118,150 194,150 394,400 318,400"/></g>
+            <rect x="374" y="82" width="60" height="60" fill="#6f9fd4" transform="rotate(45 404 112)"/>
+          </g>
+          <rect x="4" y="4" width="504" height="504" rx="108" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="8"/>
         </svg>
         <span class="home-name">NOVALIS</span>
       </a>
