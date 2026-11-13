@@ -14,10 +14,9 @@
   --terracotta: #dc9660;  /* 背景のテラコッタ色 */
   --brown: #4e2a12;       /* テラコッタの上に置く文字の色 */
 
-  /* フォント（index.html で Google Fonts を読み込んでいます） */
+  /* フォント：本文は common.css（全ページ共通）の --font、見出し・数字はサイ⚪︎スロット専用 */
   --font-display: "Dela Gothic One", "Hiragino Sans", sans-serif;   /* 見出し・数字用 */
-  --font-body: "Zen Kaku Gothic New", -apple-system, BlinkMacSystemFont, "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif; /* 本文用 */
+  --font-body: var(--font, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif); /* 本文用（共通） */
   --reel-h: 66px; /* スロット1行の高さ */
 }
 
@@ -89,7 +88,7 @@ button { font-family: inherit; }
 .home svg,
 .home img { width: 32px; height: 32px; flex: none; display: block; border-radius: 7px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25); }
 .home-name {
-  font-family: "Unbounded", var(--font-body);
+  font-family: var(--font-en, "Unbounded", sans-serif);
   font-weight: 800;
   font-size: 0.78rem;
   letter-spacing: 0.18em;
@@ -560,7 +559,4 @@ button { font-family: inherit; }
 .reel-code { font-size: 0.82rem; letter-spacing: 0.03em; }
 .reel-price { font-size: 0.9rem; }
 
-/* iPhone でボタンなどを連打しても、ダブルタップで画面が拡大・縮小しないように（ピンチでの拡大はそのまま） */
-button, a, input, textarea, select, label, summary, [role="button"] {
-  touch-action: manipulation;
-}
+/* ダブルタップでの拡大対策は common.css（全ページ共通）に入っています */
