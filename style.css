@@ -559,3 +559,8 @@ button { font-family: inherit; }
 }
 .reel-code { font-size: 0.82rem; letter-spacing: 0.03em; }
 .reel-price { font-size: 0.9rem; }
+
+/* iPhone でボタンなどを連打しても、ダブルタップで画面が拡大・縮小しないように（ピンチでの拡大はそのまま） */
+button, a, input, textarea, select, label, summary, [role="button"] {
+  touch-action: manipulation;
+}
